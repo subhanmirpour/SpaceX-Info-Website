@@ -1,0 +1,108 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18pt;
+    margin: 0;
+    padding: 0;
+    background-color: #c59c63;
+    color: #F5F5F5;
+    width: 50%; 
+    margin: 0 auto; 
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.8); 
+}
+
+header, footer {
+    background-color: #1A1A3D;
+    color: #FFD700;
+    padding: 20px 0;
+    text-align: center;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: #FFD700;
+    text-align: center;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #E0E0E0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav a {
+    color: #F5F5F5;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    transition: background 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #3D3D5C;
+    border-radius: 5px;
+}
+
+footer p {
+    font-size: 14px;
+    color: #CCCCCC;
+}
+
+button, .button {
+    background-color: #3D3D5C;
+    color: #FFD700;
+    padding: 10px 20px;
+    border: 2px solid #FFD700;
+    border-radius: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+button:hover, .button:hover {
+    background-color: #FFD700;
+    color: #3D3D5C;
+}
+
+section {
+    padding: 60px 0;
+}
+
+.header-spacing {
+    margin-bottom: 40px;
+}
+
+.blog-post {
+    background-color: #3D3D5C;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.blog-post h2 {
+    color: #FFD700;
+}
+
+.blog-post p {
+    color: #E0E0E0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
