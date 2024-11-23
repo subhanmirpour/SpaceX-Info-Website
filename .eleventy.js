@@ -7,34 +7,42 @@ module.exports = function (eleventyConfig) {
   // Watch the CSS files in the assets folder for changes to trigger a rebuild
   eleventyConfig.addWatchTarget("src/assets/css");
 
-  // Create a collection named "posts" that filters and sorts Markdown files by date
+  // Create a collection named "posts" that combines static Markdown files and dynamic posts from Strapi
   eleventyConfig.addCollection("posts", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/posts/*.md").sort((a, b) => {
-      // Sort the posts in descending order based on the date
-      return new Date(b.date) - new Date(a.date);
+    // Get all the static posts from the Markdown files in src/posts/*.md
+    let staticPosts = collectionApi.getFilteredByGlob("src/posts/*.md");
+
+    // Get the dynamic posts fetched from Strapi (via _data/posts.js)
+    let dynamicPosts = require("_data/posts.js")();
+
+    // Combine both arrays (static and dynamic posts)
+    let allPosts = staticPosts.concat(dynamicPosts);
+
+    // Sort the combined posts by date (from most recent to oldest)
+    return allPosts.sort((a, b) => {
+      // If a post has a 'date' property, use it for sorting
+      return new Date(b.date || b.attributes.publishedAt) - new Date(a.date || a.attributes.publishedAt);
     });
   });
 
   // Add a custom filter named "date" for formatting dates using Luxon
   eleventyConfig.addFilter("date", (dateObj, format = "MMMM dd, yyyy") => {
-    // If the dateObj is "now", create a new Date object representing the current date
     if (dateObj === "now") {
       dateObj = new Date();
     }
-    // Convert the date object to the desired format using Luxon
     return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat(format);
   });
 
   // Return the configuration object for Eleventy
   return {
     dir: {
-      input: "src", // Directory for input files
-      includes: "includes", // Directory for include files
-      layouts: "layouts", // Directory for layout files
-      output: "_site" // Directory for output files
+      input: "src", 
+      includes: "includes", 
+      layouts: "layouts", 
+      output: "_site" 
     },
-    templateFormats: ["njk", "md", "html"], // Supported template formats
-    htmlTemplateEngine: "njk", // Template engine for HTML files
-    markdownTemplateEngine: "njk", // Template engine for Markdown files
+    templateFormats: ["njk", "md", "html"], 
+    htmlTemplateEngine: "njk", 
+    markdownTemplateEngine: "njk", 
   };
 };
